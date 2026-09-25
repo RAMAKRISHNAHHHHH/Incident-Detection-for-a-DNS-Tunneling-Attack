@@ -1,0 +1,9 @@
+{
+  "_comment": "Load a file shaped like this via the 'Load log file' button. Either a bare array, or an object with a 'queries' array, both work.",
+  "queries": [
+    { "timestamp": "2026-09-25T09:12:03.000Z", "srcIp": "10.20.4.12", "queryName": "www.github.com", "queryType": "A" },
+    { "timestamp": "2026-09-25T09:12:04.500Z", "srcIp": "10.20.4.12", "queryName": "api.slack.com", "queryType": "A" },
+    { "timestamp": "2026-09-25T09:12:05.100Z", "srcIp": "10.20.5.19", "queryName": "k3jf9as8dl2n4z7q.evil-c2.net", "queryType": "TXT" },
+    { "timestamp": "2026-09-25T09:12:05.900Z", "srcIp": "10.20.5.19", "queryName": "p0za9x7c3mfb1kd8.evil-c2.net", "queryType": "TXT" }
+  ]
+}

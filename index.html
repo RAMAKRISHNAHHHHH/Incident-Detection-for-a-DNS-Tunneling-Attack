@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal Watch — DNS Tunneling Detection</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="shell">
+
+    <div class="top">
+      <div class="brand">
+        <span class="mark"></span>
+        <div>
+          <h1>Signal Watch</h1>
+          <div class="sub">DNS tunneling incident detection — heuristic analysis over resolver logs</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <label class="file-btn" for="file-input">Load log file (.json)</label>
+        <input id="file-input" type="file" accept="application/json" style="display:none">
+        <button id="btn-rescan" class="primary">Generate new sample traffic</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat tone-safe">
+        <div class="value" id="stat-total">0</div>
+        <div class="label">Queries analyzed</div>
+      </div>
+      <div class="stat tone-safe">
+        <div class="value" id="stat-domains">0</div>
+        <div class="label">Apex domains observed</div>
+      </div>
+      <div class="stat" id="tile-flagged">
+        <div class="value" id="stat-flagged">0</div>
+        <div class="label">Domains flagged for review</div>
+      </div>
+      <div class="stat" id="tile-top">
+        <div class="value" id="stat-top">0</div>
+        <div class="label">Highest risk score (0–100)</div>
+      </div>
+    </div>
+
+    <div class="log-hero panel">
+      <div class="panel-head">
+        <h2>Query stream</h2>
+        <div class="scan-status"><span class="pulse"></span>replaying captured window</div>
+      </div>
+      <div class="log-stream" id="log-stream"></div>
+    </div>
+
+    <div class="main-grid">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Domains by risk score</h2>
+          <span class="count" id="incident-count">0 domains</span>
+        </div>
+        <input class="search" id="search-box" type="text" placeholder="Filter by domain or source IP…">
+        <div class="incident-list" id="incident-list"></div>
+      </div>
+
+      <div class="side-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="detail-title">—</h2>
+            <span class="score-pill" id="detail-score">0</span>
+          </div>
+          <div class="metric-grid" id="metric-grid"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Signal breakdown</h2></div>
+          <div class="signal-bars" id="signal-bars"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Highest-entropy sample queries</h2></div>
+          <div class="samples" id="sample-queries"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="note">
+      Signal Watch is an educational demo. Traffic is synthetic by default — use “Generate new sample traffic” to
+      reshuffle it, or load your own resolver log as JSON (see <code>data/sample-log-schema.json</code> for the
+      expected fields). Detection is purely heuristic: entropy, label length, charset shape, query-type mix,
+      subdomain uniqueness, and query rate are combined into a single 0–100 score per domain. It is a learning
+      tool, not a production intrusion-detection system — tune thresholds against your own baseline before relying
+      on it operationally.
+    </footer>
+  </div>
+
+  <script src="js/detector.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
